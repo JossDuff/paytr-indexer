@@ -1,0 +1,33 @@
+name: paytr-indexer
+networks:
+- id: 80001
+  rpc_config:
+    url: https://rpc.ankr.com/polygon_mumbai
+  start_block: 42072451
+  contracts:
+  - name: paytr
+    address:
+    - 0x66532e0fcf764a7437A9Bd6a2f446cE3A4b63624
+    handler: src/EventHandlers.ts
+    events:
+    - event: ContractParametersUpdatedEvent(uint16 feeModifier, uint256 minDueDateParameter, uint256 maxDueDateParameter, uint256 minAmount, uint256 maxAmount, uint8 maxPayoutArraySize)
+      requiredEntities:
+      - name: EventsSummary
+    - event: InterestPayoutEvent(address tokenAddress, address payee, uint256 interestAmount, bytes paymentReference)
+      requiredEntities:
+      - name: EventsSummary
+    - event: OwnershipTransferred(address indexed previousOwner, address indexed newOwner)
+      requiredEntities:
+      - name: EventsSummary
+    - event: Paused(address account)
+      requiredEntities:
+      - name: EventsSummary
+    - event: PayOutERC20Event(address tokenAddress, address payee, address feeAddress, uint256 amount, bytes paymentReference, uint256 feeAmount)
+      requiredEntities:
+      - name: EventsSummary
+    - event: PaymentERC20Event(address tokenAddress, address payee, address feeAddress, uint256 amount, uint256 dueDate, uint256 feeAmount, bytes paymentReference)
+      requiredEntities:
+      - name: EventsSummary
+    - event: Unpaused(address account)
+      requiredEntities:
+      - name: EventsSummary

@@ -1,0 +1,79 @@
+type EventsSummary {
+  id: ID!
+  contractParametersUpdatedEvent: [ContractParametersUpdatedEvent!]! @derivedFrom(field: "eventsSummary")
+  contractParametersUpdatedEventsCount: BigInt!
+  interestPayoutEvent: [InterestPayoutEvent!]! @derivedFrom(field: "eventsSummary")
+  interestPayoutEventsCount: BigInt!
+  ownershipTransferred: [OwnershipTransferred!]! @derivedFrom(field: "eventsSummary")
+  ownershipTransferredsCount: BigInt!
+  paused: [Paused!]! @derivedFrom(field: "eventsSummary")
+  pausedsCount: BigInt!
+  payOutERC20Event: [PayOutERC20Event!]! @derivedFrom(field: "eventsSummary")
+  payOutERC20EventsCount: BigInt!
+  paymentERC20Event: [PaymentERC20Event!]! @derivedFrom(field: "eventsSummary")
+  paymentERC20EventsCount: BigInt!
+  unpaused: [Unpaused!]! @derivedFrom(field: "eventsSummary")
+  unpausedsCount: BigInt!
+}
+
+type ContractParametersUpdatedEvent {
+  id: ID!
+  feeModifier: BigInt!
+  minDueDateParameter: BigInt!
+  maxDueDateParameter: BigInt!
+  minAmount: BigInt!
+  maxAmount: BigInt!
+  maxPayoutArraySize: BigInt!
+  eventsSummary: String!
+}
+
+type InterestPayoutEvent {
+  id: ID!
+  tokenAddress: String!
+  payee: String!
+  interestAmount: BigInt!
+  paymentReference: String!
+  eventsSummary: String!
+}
+
+type OwnershipTransferred {
+  id: ID!
+  previousOwner: String!
+  newOwner: String!
+  eventsSummary: String!
+}
+
+type Paused {
+  id: ID!
+  account: String!
+  eventsSummary: String!
+}
+
+type PayOutERC20Event {
+  id: ID!
+  tokenAddress: String!
+  payee: String!
+  feeAddress: String!
+  amount: BigInt!
+  paymentReference: String!
+  feeAmount: BigInt!
+  eventsSummary: String!
+}
+
+type PaymentERC20Event {
+  id: ID!
+  tokenAddress: String!
+  payee: String!
+  feeAddress: String!
+  amount: BigInt!
+  dueDate: BigInt!
+  feeAmount: BigInt!
+  paymentReference: String!
+  eventsSummary: String!
+}
+
+type Unpaused {
+  id: ID!
+  account: String!
+  eventsSummary: String!
+}
